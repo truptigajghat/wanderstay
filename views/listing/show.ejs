@@ -20,29 +20,17 @@
                     <strong>Location:</strong> <%= listing.location %> <br>
                     <strong>Country:</strong> <%= listing.country %> <br>
                 </p>
+                <div class="btns d-flex justify-content-center gap-3 mt-3 mb-3">
+                    <a href="/listings" class="btn ad-btn">🔙 Back</a>
+                    <a href="/listings/<%= listing._id %>/edit" class="btn btn-warning ad-btn">✏️ Edit</a>
+                    <form action="/listings/<%= listing._id %>?_method=DELETE" method="post" class="d-inline">
+                        <button class="btn btn-danger ad-btn">🗑️ Delete</button>
+                    </form>
+                </div>
             </div>
         </div>     
     </div>
 
-    <!-- Action Buttons -->
-    <div class="btns d-flex justify-content-center gap-3 mt-3">
-        <a href="/listings" class="btn ad-btn">🔙 Back to Listings</a>
-        
-        <% 
-            const ownerId = listing.owner._id || listing.owner;
-            const currentUserId = currUser ? currUser._id : null;
-            const isOwner = currentUserId && ownerId && (currentUserId.toString() === ownerId.toString());
-        %>
-        
-        <% if(isOwner) { %>
-            <a href="/listings/<%= listing._id %>/edit" class="btn btn-warning ad-btn">✏️ Edit</a>
-            <form action="/listings/<%= listing._id %>?_method=DELETE" method="post" class="d-inline">
-                <button class="btn btn-danger ad-btn">🗑️ Delete</button>
-            </form>
-        <% } else if (currUser) { %>
-            <!-- Debug: You are logged in as <%= currUser._id %>, but owner is <%= ownerId %> -->
-        <% } %>
-    </div>
     <!-- Review Section -->
 
     <div class="col-md-8 mx-auto mt-4">
