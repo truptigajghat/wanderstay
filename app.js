@@ -142,10 +142,14 @@ app.all("*", (req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-
     const {status = 500, message = "something went wrong"} = err;
-    res.status(status).render("error", {message});
- 
+    console.error("Server Error:", err);
+    res.status(status);
+    try {
+        res.render("error", {message});
+    } catch (renderError) {
+        res.send(`Error: ${message}`);
+    }
 });
 
 if (process.env.NODE_ENV !== "production") {
