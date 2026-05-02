@@ -22,10 +22,13 @@
                 </div>
                 <div class="mt-3 mb-3 d-flex justify-content-center gap-2">
                     <a href="/listings" class="btn btn-primary">🔙 Back</a>
-                    <a href="/listings/<%= listing._id %>/edit" class="btn btn-warning text-dark">✏️ Edit</a>
-                    <form action="/listings/<%= listing._id %>?_method=DELETE" method="post" class="d-inline">
-                        <button class="btn btn-danger">🗑️ Delete</button>
-                    </form>
+                    
+                    <% if(currUser && currUser._id.toString() === listing.owner._id.toString()) { %>
+                        <a href="/listings/<%= listing._id %>/edit" class="btn btn-warning text-dark">✏️ Edit</a>
+                        <form action="/listings/<%= listing._id %>?_method=DELETE" method="post" class="d-inline">
+                            <button class="btn btn-danger">🗑️ Delete</button>
+                        </form>
+                    <% } %>
                 </div>
             </div>
         </div>     
