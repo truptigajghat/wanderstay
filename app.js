@@ -26,13 +26,13 @@ const User = require("./models/users");
 
 
 
-const dbUrl = process.env.ATLASDB_URL;
+const dbUrl = process.env.ATLASDB_URL || "mongodb://127.0.0.1:27017/wanderlust";
 
 main() 
 .then(()=> {
     console.log("connected to db");
 }).catch((err) => {
-    console.log(err);
+    console.log("DB Connection Error:", err);
 });
 async function main(){
     await mongoose.connect(dbUrl);
@@ -46,16 +46,20 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 app.engine("ejs", ejsMate);
 
+// Root redirect
+app.get("/", (req, res) => {
+    res.redirect("/listings");
+});
 
 const store = MongoStore.create({
     mongoUrl: dbUrl,
     crypto: {
-        secret: process.env.SECRET,
+        secret: process.env.SECRET || "mysupersecretcode",
     },
     touchAfter: 24 * 3600,
 });
 
-store.on("error", () => {
+store.on("error", (err) => {
     console.log("error in mongo session store", err);
 });
 
