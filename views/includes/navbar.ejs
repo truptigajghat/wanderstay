@@ -6,8 +6,8 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-link <%= (currentRoute === '/listings' ? 'active' : '') %>" href="/listings">Explore</a>
-          <a class="nav-link <%= (currentRoute === '/listings/new' ? 'active' : '') %>" href="/listings/new">Wanderstay your home</a>
+          <a class="nav-link <%= (typeof currentRoute !== 'undefined' && currentRoute === '/listings' ? 'active' : '') %>" href="/listings">Explore</a>
+          <a class="nav-link <%= (typeof currentRoute !== 'undefined' && currentRoute === '/listings/new' ? 'active' : '') %>" href="/listings/new">Wanderstay your home</a>
 
         </div>
         <div class="navbar-nav ms-auto">
@@ -17,9 +17,9 @@
           </form>
         </div>
         <div class="navbar-nav ms-auto">
-          <% if(!currUser) { %>
-          <a class="nav-link <%= (currentRoute === '/signup' ? 'active' : '') %>"  href="/signup">Signup</a>
-          <a class="nav-link <%= (currentRoute === '/login' ? 'active' : '') %>" href="/login">Login</a>
+          <% if(typeof currUser === 'undefined' || !currUser) { %>
+          <a class="nav-link <%= (typeof currentRoute !== 'undefined' && currentRoute === '/signup' ? 'active' : '') %>"  href="/signup">Signup</a>
+          <a class="nav-link <%= (typeof currentRoute !== 'undefined' && currentRoute === '/login' ? 'active' : '') %>" href="/login">Login</a>
           <% } else { %>
             <span class="navbar-text me-2 user-greeting">
               👋 Hello, <%= currUser.username %>!
