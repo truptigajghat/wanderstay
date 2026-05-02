@@ -6,9 +6,7 @@
       "use": "@vercel/node"
     }
   ],
-  "description": "Deployment configuration for Wanderstay",
-  "IsArtifact": false,
-  "Overwrite": true,
+
   "routes": [
     {
       "src": "/(.*)",
