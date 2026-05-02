@@ -136,18 +136,35 @@ const validateReview = (req,res, next) =>{
 };
 
 
+// Database Test Route
+app.get("/db-test", async (req, res) => {
+    try {
+        const state = mongoose.connection.readyState;
+        const states = ["disconnected", "connected", "connecting", "disconnecting"];
+        res.send(`Database Status: ${states[state]} (URI: ${dbUrl.substring(0, 20)}...)`);
+    } catch (err) {
+        res.send(`DB Test Error: ${err.message}`);
+    }
+});
+
 app.all("*", (req, res, next) => {
     next(new expressError(404, "Page Not Found!"));
 });
 
 app.use((err, req, res, next) => {
     const {status = 500, message = "something went wrong"} = err;
-    console.error("Server Error:", err);
+    console.error("CRITICAL ERROR:", err);
+    
+    if (res.headersSent) {
+        return next(err);
+    }
+
     res.status(status);
-    try {
+    // Try to send a simple text response first to ensure the user sees something
+    if (process.env.NODE_ENV === "production") {
+        res.send(`App Error: ${message}. Please check logs.`);
+    } else {
         res.render("error", {message});
-    } catch (renderError) {
-        res.send(`Error: ${message}`);
     }
 });
 
