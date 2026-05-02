@@ -25,16 +25,16 @@
     </div>
 
     <!-- Action Buttons -->
-     
-    <% if(currUser && currUser._id.equals(listing.owner._id)) {%>
-    <div class="btns d-flex justify-content-center gap-8  ">
-        <a href="/listings" class="btn btns ad-btn mt-1 ml-0 d-flex justify-content-center">🔙 Back to Listings</a>
-        <a href="/listings/<%= listing._id %>/edit" class="btn btn-warning ad-btn d-flex justify-content-center">✏️ Edit</a>
-        <form action="/listings/<%= listing._id %>?_method=DELETE" method="post" class="d-inline">
-            <button class="btn btn-danger ad-btn d-flex justify-content-center">🗑️ Delete</button>
-        </form>
+    <div class="btns d-flex justify-content-center gap-3 mt-3">
+        <a href="/listings" class="btn ad-btn">🔙 Back to Listings</a>
+        
+        <% if(currUser && currUser._id.toString() === listing.owner._id.toString()) { %>
+            <a href="/listings/<%= listing._id %>/edit" class="btn btn-warning ad-btn">✏️ Edit</a>
+            <form action="/listings/<%= listing._id %>?_method=DELETE" method="post" class="d-inline">
+                <button class="btn btn-danger ad-btn">🗑️ Delete</button>
+            </form>
+        <% } %>
     </div>
-    <% } %>
     <!-- Review Section -->
 
     <div class="col-md-8 mx-auto mt-4">
