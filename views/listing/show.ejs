@@ -11,20 +11,20 @@
         <div class="card shadow-lg">
             <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="<%= listing.title %>">
             <div class="card-body text-center">
-                <p class="card-text">
-                    <p class="listing-owner">
+                <div class="card-text">
+                    <div class="listing-owner mb-2">
                         👤 Listed by: <%= listing.owner.username %>
-                    </p><br>                      
+                    </div>                      
                     <strong>Description:</strong> <%= listing.description %> <br>
                     <strong>Price:</strong> &#8377;<%= listing.price.toLocaleString("en-IN") %><br>
                     <strong>Location:</strong> <%= listing.location %> <br>
                     <strong>Country:</strong> <%= listing.country %> <br>
-                </p>
-                <div class="btns d-flex justify-content-center gap-3 mt-3 mb-3">
-                    <a href="/listings" class="btn ad-btn">🔙 Back</a>
-                    <a href="/listings/<%= listing._id %>/edit" class="btn btn-warning ad-btn">✏️ Edit</a>
+                </div>
+                <div class="mt-3 mb-3 d-flex justify-content-center gap-2">
+                    <a href="/listings" class="btn btn-primary">🔙 Back</a>
+                    <a href="/listings/<%= listing._id %>/edit" class="btn btn-warning text-dark">✏️ Edit</a>
                     <form action="/listings/<%= listing._id %>?_method=DELETE" method="post" class="d-inline">
-                        <button class="btn btn-danger ad-btn">🗑️ Delete</button>
+                        <button class="btn btn-danger">🗑️ Delete</button>
                     </form>
                 </div>
             </div>
