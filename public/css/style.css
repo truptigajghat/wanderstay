@@ -486,7 +486,7 @@ body{
 .search-inp{
     border-radius: 5rem;
     font-weight: 600;
-    padding: 0.2rem 2rem 0.2rem 6rem;
+    padding: 0.2rem 1rem 0.2rem 1rem;
     transition: all 0.3s ease-in-out;
 }
 .search-inp:hover{
